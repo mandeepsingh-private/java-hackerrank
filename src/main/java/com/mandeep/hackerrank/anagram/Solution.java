@@ -13,6 +13,15 @@ public class Solution {
 		if (a.length() != b.length()) {
 			return false;
 		}
+		// if length =1 then just compare and decide
+		if (a.length() == 1 && a.length() == b.length()) {
+			if (a.toLowerCase().equals(b.toLowerCase())) {
+
+				return true;
+			} else {
+				return false;
+			}
+		}
 		int count = 0;
 		int bCount = 0;
 		// create array
@@ -40,19 +49,34 @@ public class Solution {
 		}
 		for (int i = 0; i < a.length(); i++) {
 			for (int j = 0; j < a.length(); j++) {
-				if (aArray[i] == bArray[j] && aArray[i] != '#') {
-					fArray[i] = aArray[i];
-					aFFreq[i] = aFreq[i];
-					bFFreq[i] = bFreq[j];
+				if (aArray[i] != '#') {
+					if (aArray[i] == bArray[j]) {
+						fArray[i] = aArray[i];
+						aFFreq[i] = aFreq[i];
+						bFFreq[i] = bFreq[j];
+					}
 				}
 			}
 		}
 
+//		for (int i = 0; i < a.length(); i++) {
+//			System.out.println(aArray[i] + " - " + bArray[i] + " : " + aFreq[i]
+//					+ " : " + bFreq[i]);
+//		}
+//		for (int i = 0; i < a.length(); i++) {
+//			System.out.println("Final array :" + fArray[i] + " : " + aFFreq[i]
+//					+ " : " + bFFreq[i]);
+//		}
 		for (int i = 0; i < a.length(); i++) {
-			System.out.println("A " + fArray[i] + " : " + aFFreq[i] + " : " + bFFreq[i]);
+			if (fArray[i] != '#' && fArray[i] != 0) {
+				if (aFFreq[i] == bFFreq[i]) {
+					return true;
+				} else
+					return false;
+			}
 		}
 
-		return true;
+		return false;
 	}
 
 	public static void main(String[] args) {
@@ -63,9 +87,30 @@ public class Solution {
 		String a = "anagram";
 		String b = "margana";
 		boolean ret = isAnagram(a, b);
+		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
 		System.out.println("###################");
 		a = "anagramm";
 		b = "marganaa";
+		ret = isAnagram(a, b);
+		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
+		System.out.println("###################");
+		a = "cat";
+		b = "aCt";
+		ret = isAnagram(a, b);
+		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
+		System.out.println("###################");
+		a = "aanananananananananannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnaaaaa";
+		b = "abcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb";
+		ret = isAnagram(a, b);
+		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
+		System.out.println("###################");
+		a = "A";
+		b = "A";
+		ret = isAnagram(a, b);
+		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
+		System.out.println("###################");
+		a = "AAA";
+		b = "BBB";
 		ret = isAnagram(a, b);
 		System.out.println((ret) ? "Anagrams" : "Not Anagrams");
 	}
